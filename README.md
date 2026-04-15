@@ -1,5 +1,4 @@
 # Mathematical-Reliability-for-ML-Predictions
-# Split Conformal Prediction — Finite-Sample Reliability Layer
 
 > *Most ML pipelines answer "how accurate is this model?" This project answers a harder question: "how often can you trust a specific output?"*
 
@@ -153,5 +152,3 @@ Tensor outputs are reproducible, diffable, and embeddable in CI pipelines. Plots
 - Tibshirani, R. J., Barber, R. F., Candès, E. J., & Ramdas, A. (2019). Conformal prediction under covariate shift. *NeurIPS*.
 
 ---
-
-*Questions or feedback: open an issue or reach out directly.*
