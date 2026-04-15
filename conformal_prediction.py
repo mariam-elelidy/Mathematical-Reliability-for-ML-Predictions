@@ -1,7 +1,6 @@
 """
 Split Conformal Prediction — Finite-Sample Reliability Layer
 =============================================================
-Author : Mariam Mohamed Elelidy
 Purpose: Add measurable uncertainty bounds to point predictions without
          touching model internals. Uses split conformal calibration to
          produce prediction intervals with a finite-sample coverage
