@@ -1,0 +1,79 @@
+Split Conformal Prediction — Reliability Dashboard
+────────────────────────────────────────────────────────────────────────
+Assumption : exchangeability / i.i.d.
+α = 0.10   │   target coverage = 0.90   │   n = 600   d = 8   │   seeds 10/10
+────────────────────────────────────────────────────────────────────────
+
+Running statistics  (tensor: [coverage, avg_width, q])
+  mean : tensor([0.8992, 2.0014, 1.0007])
+  std  : tensor([0.0278, 0.1086, 0.0543])
+
+  coverage   0.8992  ████████████████████  (target 0.900)  ✓
+  avg width  2.0014  ██████████░░░░░░░░░░
+  q (half)   1.0007  ██████████░░░░░░░░░░
+
+Per-seed results
+  seed  coverage  avg_width        q  coverage bar
+  ────────────────────────────────────────────────────────────────
+     0    0.9333     1.9711   0.9856  █████████████████░░░
+     1    0.9333     2.0347   1.0173  █████████████████░░░
+     2    0.8500     1.8821   0.9411  █████████████████░░░  *
+     3    0.9000     1.9047   0.9524  ██████████████████░░
+     4    0.9083     1.9973   0.9986  ██████████████████░░
+     5    0.8667     1.9267   0.9633  █████████████████░░░  *
+     6    0.9000     1.9746   0.9873  ██████████████████░░
+     7    0.8667     1.9302   0.9651  █████████████████░░░  *
+     8    0.9083     2.2466   1.1233  ██████████████████░░
+     9    0.9250     2.1458   1.0729  █████████████████░░░
+  (* = below target coverage)
+
+Preview — seed 9 — first 5 test points
+cols: [pred, lo, hi, y_true, covered]
+tensor([[ 0.7363, -0.3366,  1.8092, -0.1050,  1.0000],
+        [ 2.9645,  1.8916,  4.0374,  2.5043,  1.0000],
+        [-5.6604, -6.7333, -4.5875, -4.1261,  0.0000],
+        [ 3.1281,  2.0552,  4.2010,  3.3884,  1.0000],
+        [ 0.2036, -0.8693,  1.2765,  0.3578,  1.0000]])
+
+════════════════════════════════════════════════════════════════════════
+DONE — Final metrics tensor  [coverage, avg_width, q]
+════════════════════════════════════════════════════════════════════════
+tensor([[0.9333, 1.9711, 0.9856],
+        [0.9333, 2.0347, 1.0173],
+        [0.8500, 1.8821, 0.9411],
+        [0.9000, 1.9047, 0.9524],
+        [0.9083, 1.9973, 0.9986],
+        [0.8667, 1.9267, 0.9633],
+        [0.9000, 1.9746, 0.9873],
+        [0.8667, 1.9302, 0.9651],
+        [0.9083, 2.2466, 1.1233],
+        [0.9250, 2.1458, 1.0729]])
+
+Mean  : tensor([0.8992, 2.0014, 1.0007])
+Std   : tensor([0.0278, 0.1086, 0.0543])
+Min   : tensor([0.8500, 1.8821, 0.9411])
+Max   : tensor([0.9333, 2.2466, 1.1233])
+
+Seeds below target coverage (0.90): 3/10
+
+────────────────────────────────────────────────────────────────────────
+Interpretation notes
+────────────────────────────────────────────────────────────────────────
+• Mean coverage 0.899 ≈ 0.900 target — the finite-sample guarantee holds
+  in expectation across seeds.
+
+• 3 seeds fell below 0.90 (seeds 2, 5, 7 at 0.850, 0.867, 0.867).
+  This is expected under a *marginal* guarantee: individual runs can miss;
+  the average converges to the target as the number of seeds grows.
+
+• Width std 0.109 is higher than coverage std 0.028, showing that
+  interval tightness is more sensitive to data variability than whether
+  the coverage target is met.
+
+• Seed 8 produced the widest intervals (avg_width 2.247, q 1.123),
+  suggesting a harder calibration split by chance. Coverage still held
+  at 0.908, illustrating the width–coverage trade-off.
+
+• To tighten intervals without sacrificing coverage: increase n_cal,
+  use a stronger base model, or switch to locally-adaptive conformal
+  scores (e.g. normalised residuals).
