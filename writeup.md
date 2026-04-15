@@ -9,7 +9,7 @@
 
 Most ML pipelines report a point prediction and a single test score. That hides the question that actually matters in deployment: *how often can you trust this output?*
 
-This project adds a small, testable **reliability layer** on top of any regression model — split conformal prediction — that produces prediction intervals with a finite-sample coverage guarantee under an explicit exchangeability assumption. No black-box internals required.
+This artifact adds a small, testable **reliability layer** on top of any regression model — split conformal prediction — that produces prediction intervals with a finite-sample coverage guarantee under an explicit exchangeability assumption. No black-box internals required.
 
 Key outputs:
 - Empirical coverage vs interval width, measured per seed and aggregated
