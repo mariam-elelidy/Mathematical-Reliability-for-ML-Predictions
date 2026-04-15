@@ -1,5 +1,5 @@
 # Mathematical Reliability for ML Predictions
-> *Most ML pipelines answer "how accurate is this model?" This project answers a harder question: "how often can you trust a specific output?"*
+> *Most ML pipelines answer "how accurate is this model?" This artifact answers a harder question: "how often can you trust a specific output?"*
 
 ---
 
